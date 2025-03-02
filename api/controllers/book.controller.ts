@@ -5,7 +5,7 @@ export const getBooks = async (req: Request, res: Response): Promise<any> => {
     const books = await prisma.book.findMany();
     return res.json(books);
   } catch (error) {
-    res.status(500).json({ error: "Kitapları getirirken hata oluştu." });
+    res.status(500).json({ success: false, message: "While getting books, an error occurred." });
   }
 };
 
@@ -14,26 +14,26 @@ export const getBookById = async (req: Request, res: Response): Promise<any>  =>
   try {
     const book = await prisma.book.findUnique({
       where: { id },
-      include: { borrowRecord: true },
+      include: { borrowRecord: { include: { user: true } } },
     });
 
-    if (!book) return res.status(404).json({ error: "Kitap bulunamadı." });
+    if (!book) return res.status(404).json({ success: false, message: "Book not found." });
 
     return res.json(book);
   } catch (error) {
-    res.status(500).json({ error: "Kitabı getirirken hata oluştu." });
+    res.status(500).json({ success: false, message: "While getting book, an error occurred." });
   }
 };
 
 export const createBook = async (req: Request, res: Response): Promise<any> => {
-  const { title, author, year } = req.body;
+  const { title, author, year, summary } = req.body;
   try {
     const book = await prisma.book.create({
-      data: { title, author, year },
+      data: { title, author, year, summary },
     });
     return res.json(book);
   } catch (error) {
-    res.status(500).json({ error: "Kitap oluşturulurken hata oluştu." });
+    res.status(500).json({ success: false, message: "While creating book, an error occurred." });
   }
 };
 
