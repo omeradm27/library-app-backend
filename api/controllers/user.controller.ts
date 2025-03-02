@@ -57,11 +57,12 @@ export const borrowBook = async (req: Request, res: Response): Promise<any> => {
       return res.status(400).json({ success: false, message: "Book is out of stock." });
     }
     const userBorrowHistory = await prisma.borrowRecord.findFirst({
-      where: { userId, bookId },
+      where: { userId, bookId, returnedAt: null },
+      include: { user: true },
     });
 
     if (userBorrowHistory) {
-      return res.status(400).json({ success: false, message: "You have already borrowed this book before." });
+      return res.status(400).json({ success: false, message: userBorrowHistory.user.firstName + " " + userBorrowHistory.user.lastName + " have already borrowed this book before." });
     }
     const record = await prisma.$transaction(async (prisma) => {
       const newRecord = await prisma.borrowRecord.create({
