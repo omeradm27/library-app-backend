@@ -19,6 +19,7 @@ model Book {
   id        String   @id @default(uuid())
   title     String
   author    String
+  summary   String?
   year      Int
   rating    Float?   @default(0.0)
 
