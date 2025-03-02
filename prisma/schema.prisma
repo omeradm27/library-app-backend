@@ -21,6 +21,8 @@ model Book {
   author    String
   summary   String?
   year      Int
+  isAvaliable Boolean @default(true)
+  quantity    Int      @default(0)
   rating    Float?   @default(0.0)
   totalRate Int      @default(0)
 

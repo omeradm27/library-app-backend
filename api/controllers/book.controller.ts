@@ -26,10 +26,10 @@ export const getBookById = async (req: Request, res: Response): Promise<any>  =>
 };
 
 export const createBook = async (req: Request, res: Response): Promise<any> => {
-  const { title, author, year, summary } = req.body;
+  const { title, author, year, summary, quantity } = req.body;
   try {
     const book = await prisma.book.create({
-      data: { title, author, year, summary },
+      data: { title, author, year, summary, quantity },
     });
     return res.json(book);
   } catch (error) {
