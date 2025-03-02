@@ -22,6 +22,7 @@ model Book {
   summary   String?
   year      Int
   rating    Float?   @default(0.0)
+  totalRate Int      @default(0)
 
   borrowRecord BorrowRecord[]
 }
@@ -29,9 +30,10 @@ model Book {
 model BorrowRecord {
   id         String   @id @default(uuid())
   userId     String
-  bookId     String   @unique
+  bookId     String
   borrowedAt DateTime @default(now())
   returnedAt DateTime?
+  rating     Float?
 
   user User @relation(fields: [userId], references: [id],onDelete: Cascade,onUpdate: Cascade)
   book Book @relation(fields: [bookId], references: [id], onDelete: Cascade,onUpdate: Cascade)
