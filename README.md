@@ -21,10 +21,22 @@ Ensure you have the following installed:
 
 ## Getting Started
 
-### 1. Clone the Repository
+### Option 1: Using Git Clone
+
+#### 1. Clone the Repository
 
 ```sh
-git clone git@github-personal:omeradm27/library-app-backend.git
+git clone https://github.com/omeradm27/library-app-backend.git
+cd library-app-backend
+```
+
+### Option 2: Using ZIP File
+
+#### 1. Extract the ZIP File
+- Download and extract the provided ZIP file.
+- Navigate into the extracted folder.
+
+```sh
 cd library-app-backend
 ```
 
