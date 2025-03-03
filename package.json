@@ -7,7 +7,8 @@
     "seed": "ts-node prisma/seed.ts",
     "dev": "nodemon --ext ts --exec ts-node api/server.ts",
     "build": "tsc",
-    "build_first": "prisma generate && prisma migrate deploy && tsc",
+    "postinstall": "prisma generate",
+    "build_first": "npx prisma generate && npx prisma migrate deploy && tsc",
     "start": "node dist/server.js"
   },
   "repository": {
